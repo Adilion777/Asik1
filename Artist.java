@@ -1,38 +1,29 @@
 public class Artist {
     private String name;
-    private int BirthYear;
+    private int birthYear;
     private String nationality;
 
-    public Artist(String name, int BirthYear,String nationality){
+    public Artist(String name, int birthYear, String nationality) {
         this.name = name;
-        this.BirthYear = BirthYear;
+        this.birthYear = birthYear;
         this.nationality = nationality;
-
-
     }
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public void setName(String name){
-        this.name = name;
+
+    public int getBirthYear() {
+        return birthYear;
     }
 
-    public int getBirthYear(){
-        return BirthYear;
-    }
-    public void setBirthYear(int BirthYear){
-        this.BirthYear = BirthYear;
-    }
-    public String getNationality (){
+    public String getNationality() {
         return nationality;
     }
-    public void setNationality(String nationality){
-        this.nationality = nationality;
 
+    public void displayInfo() {
+        System.out.println("Artist: " + name +
+                ", Born: " + birthYear +
+                ", Nationality: " + nationality);
     }
-
-    public void DisplayInfo(){
-        System.out.println("Artist"+ name + "born in" + BirthYear + "Nationality" + nationality);
-    }
-
 }

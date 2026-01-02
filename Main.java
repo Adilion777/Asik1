@@ -1,27 +1,59 @@
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
-public class Main{
-    public static void main(String[] args){
-        Artist artist1 = new Artist("Vincent van Gogh", 1853, "Dutch");
-        Artist artist2 = new Artist("Pablo Picasso", 1881,"Spanish");
 
-        Artwork artwork1 = new Artwork("Starry Night", 1889,artist1, 150000.0);
-        Artwork artwork2 = new Artwork("Guernica", 1937,artist2, 190000.0);
+public class Main {
+    public static void main(String[] args) {
 
-        ArtGallery gallery = new ArtGallery("World Art Museum", "Paris");
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Artwork> artworks = new ArrayList<>();
 
-        gallery.displayGallery();
-        System.out.println("-----------------------------");
+        // Predefined artist
+        Artist artist = new Artist("Vincent van Gogh", 1853, "Dutch");
 
-        artwork1.displayArtwork();
-        System.out.println();
-        artwork2.displayArtwork();
-        System.out.println("-----------------------------");
+        // USER INPUT (Scanner)
+        System.out.print("Enter artwork title: ");
+        String title = sc.nextLine();
 
-        if(artwork1.isMoreExpensiveThan(artwork2)) {
-            System.out.println(artwork1.getTitle() + "is more expensive than" + artwork2.getTitle());
+        System.out.print("Enter year created: ");
+        int year = sc.nextInt();
+
+        System.out.print("Enter price: ");
+        double price = sc.nextDouble();
+
+        artworks.add(new Artwork(title, year, artist, price));
+
+        artworks.add(new Artwork("Guernica", 1937,
+                new Artist("Pablo Picasso", 1881, "Spanish"), 190000));
+
+        // POLYMORPHISM
+        for (ArtItem item : artworks) {
+            item.displayInfo();
+            System.out.println();
         }
-        else {
-            System.out.println(artwork2.getTitle() + " is more expensive than " + artwork1.getTitle());
+
+        // SEARCHING
+        System.out.println("Searching for 'Guernica':");
+        for (Artwork a : artworks) {
+            if (a.getTitle().equalsIgnoreCase("Guernica")) {
+                System.out.println(a);
+            }
+        }
+
+        // FILTERING
+        System.out.println("Artworks more expensive than 160000:");
+        for (Artwork a : artworks) {
+            if (a.getPrice() > 160000) {
+                System.out.println(a);
+            }
+        }
+
+        // SORTING
+        artworks.sort(Comparator.comparingDouble(Artwork::getPrice));
+
+        System.out.println("Sorted by price:");
+        for (Artwork a : artworks) {
+            System.out.println(a);
         }
     }
 }

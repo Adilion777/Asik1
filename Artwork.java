@@ -1,49 +1,61 @@
-public class Artwork {
-    private String title;
+public class Artwork extends ArtItem {
+
     private int YearCreated;
     private Artist artist;
-    private double price;
-    public Artwork(String title,int YearCreated,Artist artist,double price){
-        this.title = title;
+
+    public Artwork(String title, int YearCreated, Artist artist, double price) {
+        super(title, price); // abstraction + inheritance
         this.YearCreated = YearCreated;
         this.artist = artist;
-        this.price = price;
-}
-public String getTitle(){
-        return title;
-}
-public void setTitle(String title){
-        this.title= title;
-}
-public int getYearCreated(){
+    }
+
+    public int getYearCreated() {
         return YearCreated;
-}
-public void setYearCreated(int YearCreated){
+    }
+
+    public void setYearCreated(int YearCreated) {
         this.YearCreated = YearCreated;
-}
-public Artist getArtist(){
+    }
+
+    public Artist getArtist() {
         return artist;
-}
-public void setArtist(Artist artist){
+    }
+
+    public void setArtist(Artist artist) {
         this.artist = artist;
-}
-public double getPrice(){
-        return price;
-}
-public void setPrice(double price){
-        this.price = price;
-}
+    }
 
-public void displayArtwork(){
-        System.out.println("Artwork:"+ title + " (" + YearCreated + ")");
-        System.out.println("Price: $" + price );
-    System.out.println("By:" + artist.getName());
+    // POLYMORPHISM
+    @Override
+    public void displayInfo() {
+        System.out.println("Artwork: " + title + " (" + YearCreated + ")");
+        System.out.println("Price: $" + price);
+        System.out.println("By: " + artist.getName());
+    }
 
-
-}
-
-public boolean isMoreExpensiveThan(Artwork other){
+    public boolean isMoreExpensiveThan(Artwork other) {
         return this.price > other.price;
+    }
+
+    // REQUIRED OVERRIDES
+    @Override
+    public String toString() {
+        return title + " (" + YearCreated + ") - $" + price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Artwork)) return false;
+        Artwork a = (Artwork) o;
+        return YearCreated == a.YearCreated && title.equals(a.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return title.hashCode() + YearCreated;
+    }
 }
 
-}
+
+
