@@ -25,7 +25,6 @@ public class Artwork extends ArtItem {
         this.artist = artist;
     }
 
-    // POLYMORPHISM
     @Override
     public void displayInfo() {
         System.out.println("Artwork: " + title + " (" + YearCreated + ")");
@@ -37,7 +36,6 @@ public class Artwork extends ArtItem {
         return this.price > other.price;
     }
 
-    // REQUIRED OVERRIDES
     @Override
     public String toString() {
         return title + " (" + YearCreated + ") - $" + price;
